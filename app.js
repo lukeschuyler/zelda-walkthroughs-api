@@ -22,4 +22,4 @@ app.get('/:game/:dungeon', ({ params: {game, dungeon} }, res, next) => {
   })
 })
 
-app.listen(8080)
+app.listen(process.env.PORT || 8080)
