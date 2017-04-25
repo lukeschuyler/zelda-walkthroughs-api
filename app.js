@@ -16,7 +16,7 @@ app.get('/:game/:dungeon', ({ params: {game, dungeon} }, res, next) => {
         var data = $(this);
         walkthrough.push(data.text());
       })
-        res.json(walkthrough)
+        res.json(JSON.stringify(walkthrough))
     }
   })
 })
