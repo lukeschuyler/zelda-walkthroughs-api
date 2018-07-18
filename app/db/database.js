@@ -4,7 +4,6 @@ const knex = require('knex')(config);
 const bookshelf = require('bookshelf')(knex);
  
 bookshelf.plugin(cascadeDelete);
-
 bookshelf.plugin('registry');
 
 module.exports = { knex, bookshelf }
