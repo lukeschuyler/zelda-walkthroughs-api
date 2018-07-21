@@ -6,7 +6,8 @@ module.exports = {
             user     : 'root',
             password : '',
             database: 'zelda_walkthroughs',
-            insecureAuth: true
+            insecureAuth: true,
+            charset : 'utf8mb4'
         },
       migrations: {
         directory: __dirname + '/app/db/migrations'
@@ -22,7 +23,8 @@ module.exports = {
             user     : 'root',
             password : '',
             database: 'zelda_walkthroughs',
-            insecureAuth: true
+            insecureAuth: true,
+            charset : 'utf8mb4'
         },
       migrations: {
         directory: __dirname + '/app/db/migrations'

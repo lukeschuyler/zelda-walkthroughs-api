@@ -19,7 +19,7 @@ const Walkthrough = bookshelf.Model.extend({
     .then(walkthrough => walkthrough)
     .catch(error => error)
   },
-  addGame(newWalkthrough) {
+  addWalkthrough(newWalkthrough) {
     return this.forge(newWalkthrough)
     .save()
     .then(walkthrough => walkthrough)
