@@ -3,7 +3,8 @@ exports.up = (knex, Promise) => {
 	return knex.schema
 	.createTable('walkthrough', table => {
             table.increments();
-            table.integer('game_id').unsigned().references('game.id')
+            table.integer('game_id').unsigned().references('game.id')   
+            table.string('dungeon_name').notNullable();  
 			table.text('content', 'longtext').notNullable();
 	})
 }

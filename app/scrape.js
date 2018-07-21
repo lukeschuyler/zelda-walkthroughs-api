@@ -21,10 +21,17 @@ const request = require('request')
 
         walkthrough.content = walkthroughArray.join('\n\n').replace('\'\\xF0\\x9F\\x98\\x89\\x0A\\x0A', '');
         walkthrough.game_id = 1;
+        walkthrough.dungeon_name = kebabToPretty(dungeon);
         return Walkthrough.addWalkthrough(walkthrough)
             .then(newWalkthrough => { console.log('done', newWalkthrough); process.exit(); })
             .catch(err => { console.log('err', err); process.exit(); });
     });
+
+    function kebabToPretty(kebab) {
+        kebab = kebab.split('-');
+        kebab.forEach(w => w.charAt(0).toUpperCase() +  w.substr(1).toLowerCase());
+        // kebab.forEach(w => console.log(w[0].toUpperCase()));
+        console.log(kebab)
+        return kebab.join(' ');
+    }
 }
-
-
