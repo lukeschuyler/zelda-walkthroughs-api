@@ -1,24 +1,29 @@
-const request = require('request')
-      cheerio = require('cheerio')
-      Game = require('./models/Game')
-      args = process.argv;
-
 const { bookshelf } = require('./db/database');
+const request = require('request')
+      cheerio = require('cheerio') 
+      Game = require('./models/Game')
+      args = process.argv,
+      game = args[2],
+      dungeon = args[3];
 
-const game = args[2];
-const dungeon = args[3];
-
-request(`http://www.zeldadungeon.net/${game}-walkthrough/${dungeon}/`, (error, response, html) => {
-    var walkthrough = [];
-    var $ = cheerio.load(html);
-    // console.log(html);
-    if (!error) {
-        $('div.walkthrough p').each(() => {
-            var data = $(this);
-            console.log(data.text());
-            walkthrough.push(data.text());
+{
+    function makeRequest() {
+        request(`http://www.zeldadungeon.net/${game}-walkthrough/${dungeon}/`, (error, response, html) => {
+            var walkthrough = [];
+            var $ = cheerio.load(html);
+            // var $ = cheerio.load('<div class="walkthrough"><p>Hello</p><p></p></div>');
+            // console.log($);
+            // console.log($('div.walkthrough p'))
+            if (!error) {
+                $('div.walkthrough p').each(() => {
+                    console.log("ROOT: ", $.root().text())
+                    $(this).text() ? walkthrough.push($(this).text()) : void 0;
+                });
+                // console.log(walkthrough)
+            }   
         });
-        // console.log(walkthrough)
-    }   
-});
+    }
+
+    makeRequest();
+}
 
