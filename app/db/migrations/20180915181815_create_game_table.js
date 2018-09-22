@@ -9,7 +9,5 @@ exports.up = (knex, Promise) => {
 	})
 }
 
-exports.down = (knex, Promise) => { 
-    return knex.schema
+exports.down = (knex, Promise) => knex.schema
     .dropTable('walkthrough');     
-}

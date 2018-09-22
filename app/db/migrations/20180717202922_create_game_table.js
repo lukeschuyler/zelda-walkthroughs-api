@@ -4,6 +4,8 @@ exports.up = (knex, Promise) => {
 	.createTable('game', (table) => {
 			table.increments();
 			table.string('title').notNullable();
+			table.integer('release_year');
+			table.string('system');
 	})
 };
 
