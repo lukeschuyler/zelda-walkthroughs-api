@@ -1,25 +1,30 @@
-var express = require('express');
-var fs = require('fs');
-var request = require('request');
-var cheerio = require('cheerio');
-const bodyParser = require('body-parser')    
-var app = express();
+// require('dotenv').config();
 
-app.use(bodyParser.json());        
+const express = require('express');
+const path = require('path');
+const { json, urlencoded } = require('body-parser');
+const routes = require('./app/routes/');
+const cors = require('cors');
+const app = express();
 
-app.get('/:game/:dungeon', ({ params: {game, dungeon} }, res, next) => {
-  request(`http://www.zeldadungeon.net/${game}-walkthrough/${dungeon}/`, function (error, response, html) {
-    var walkthrough = [];
-    var $ = cheerio.load(html);
-     if(!error){
-        $('div.walkthrough p').each(function(){
-        var data = $(this);
-        walkthrough.push(data.text());
-      });
-        console.log(walkthrough)
-        res.json(walkthrough)
-    }
+app.use(cors());
+app.use(json());
+app.use(urlencoded({ extended: false }));
+
+app.use('/api/v1/', routes);
+
+app.use((req, res, next) => {
+    const err = new Error('404 Not Found');
+    err.status = 404;
+    next(err);
+});
+
+app.use((err, req, res, next) => {
+  res.status(err.status || 500);
+  res.json({
+    message: err.message,
+    error: {}
   });
 });
 
-app.listen(process.env.PORT || 8080)
+app.listen(process.env.PORT || 8083);

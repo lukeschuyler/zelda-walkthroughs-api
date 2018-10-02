@@ -21,7 +21,7 @@ const request = require('request')
             $(this).text() ? walkthroughArray.push($(this).text().trim()) : void 0;
         });
         walkthrough.content = walkthroughArray.join('\n\n').replace('\'\\xF0\\x9F\\x98\\x89\\x0A\\x0A', '');
-        walkthrough.game_id = 17;
+        walkthrough.game_id = 1; // Ran Manually, changed game id as I scraped
         walkthrough.dungeon_name = kebabToPretty(dungeon);
 
         return Walkthrough.addWalkthrough(walkthrough)
@@ -32,7 +32,6 @@ const request = require('request')
     function kebabToPretty(kebab) {
         kebab = kebab.split('-');
         const capitalizedArray = kebab.map(w => w.charAt(0).toUpperCase() +  w.substr(1).toLowerCase());
-
         return capitalizedArray.join(' ');
     }
 }
